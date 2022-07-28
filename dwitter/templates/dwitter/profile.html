@@ -1,9 +1,13 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% block content %}
 <div class="columns">
-    <div class="column">
-        <div class="block">
+    
+	<div class="column">
+        
+		<div class="block">
             <h1 class="title is-1">{{profile.user.username|upper}}'s Dweets</h1>
         </div>
+
 		<form method="post">
 			{% csrf_token %}
 			<div class="buttons has-addons">
@@ -16,7 +20,21 @@
 			{% endif %}
 			</div>
 		</form>
+		
+		<div class="content mt-5">
+			{% for dweet in profile.user.dweets.all %}
+			<div class="box">
+				{{ dweet.body }}
+				<span class="is-small has-text-grey-light">
+					({{ dweet.created_at }})
+				</span>
+			</div>
+			{% endfor %}
+		</div>
+
     </div>
+
+
 
     <div class="column is-one-third">
         <div class="block">
@@ -39,6 +57,7 @@
                 </ul>
             </div>
         </div>
+
 
         <div class="block">
             <h3 class="title is-4">
